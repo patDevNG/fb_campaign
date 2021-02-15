@@ -4,9 +4,10 @@ const server = express()
 const bodyParser = require('body-parser')
 const port = 4000;
 const cors = require('cors')
-
-server.use(cors());
 server.use(bodyParser.urlencoded({ extended: false })) 
+server.use(cors());
+server.use(bodyParser.json())
+
 
 server.get("/", async(req,res)=>{
     res.send("Testing my api:8084")
@@ -107,5 +108,5 @@ server.post('/create_fb_ad_campaign', async(req,res)=>{
     }
   })
 server.listen(process.env.PORT || 8585,()=>{
-    console.log(`Server started at port :${port}`)
+    console.log(`Server started at port :8585`)
 })
