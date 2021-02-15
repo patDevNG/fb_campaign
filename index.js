@@ -1,10 +1,12 @@
 const express = require('express');
 const axios = require('axios');
 const server = express()
+const bodyParser = require('body-parser')
 const port = 4000;
 const cors = require('cors')
 
 server.use(cors());
+server.use(bodyParser.urlencoded({ extended: false })) 
 
 server.get("/", async(req,res)=>{
     res.send("Testing my api:8084")
