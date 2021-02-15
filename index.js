@@ -4,7 +4,7 @@ const server = express()
 const port = 4000;
 const cors = require('cors')
 
-server.use(cors);
+server.use(cors());
 
 server.get("/", async(req,res)=>{
     res.send("Testing my api:8084")
