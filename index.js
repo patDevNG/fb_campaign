@@ -101,6 +101,6 @@ server.post('/create_fb_ad_campaign', async(req,res)=>{
         res.status(500).send(error)
     }
   })
-server.listen(port,()=>{
+server.listen(process.env.PORT || 8585,()=>{
     console.log(`Server started at port :${port}`)
 })
