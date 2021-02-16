@@ -4,7 +4,7 @@ const server = express()
 const bodyParser = require('body-parser')
 const port = 4000;
 const cors = require('cors')
-server.use(bodyParser.urlencoded({ extended: false })) 
+server.use(bodyParser.urlencoded({ extended: true })) 
 server.use(cors());
 server.use(bodyParser.json())
 
@@ -44,7 +44,7 @@ server.post('/create_fb_ad_campaign', async(req,res)=>{
                 special_ad_categories :[],
                 [Campaign.Fields.name]: adset_name, // Each object contains a fields map with a list of fields supported on that object.
                 [Campaign.Fields.status]: Campaign.Status.paused,
-                [Campaign.Fields.objective]: 'LINK_CLICKS',
+                [Campaign.Fields.objective]: 'MESSAGES',
               }
         )
         const {id} =newCampaign ;
