@@ -33,8 +33,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 server.post("/create_fb_ad_campaign", upload.any(), async (req, res) => {
-  // // console.log(req.body, "this is the request from waitstaff-ui");
-  // console.log(req.files, 'files')
+  // console.log(req.body, "this is the request from waitstaff-ui");
+  console.log(req.files, 'files')
   console.log(req.body)
   const base64String = fs.readFileSync(req.files[0].path).toString("base64");
  
@@ -43,7 +43,7 @@ server.post("/create_fb_ad_campaign", upload.any(), async (req, res) => {
   let {adset_name,age_range,gender,budget,ad_desc,location_targeting_people,device_platforms,platform_facebook,platform_messenger,
     budget_type,start_time,end_time,ad_title,ad_text, merchant_id, call_to_action
   } = req.body
-  
+  console.log(req.files)
   //     let budget = req.params.budget;
    budget = parseInt(budget)*100;
      console.log(budget,"budgetttttttttttttt");
@@ -102,7 +102,7 @@ server.post("/create_fb_ad_campaign", upload.any(), async (req, res) => {
       bytes: base64String,
     });
 
-    fs.unlinkSync(req.files[0].path);
+     fs.unlinkSync(req.files[0].path);
     const adCreative = await account.createAdCreative(
         [],
         {
