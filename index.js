@@ -41,7 +41,7 @@ server.post("/create_fb_ad_campaign", upload.any(), async (req, res) => {
   // console.log({base64String})
 
   let {adset_name,age_range,gender,budget,ad_desc,location_targeting_people,device_platforms,platform_facebook,platform_messenger,
-    budget_type,start_time,end_time,ad_title,ad_text, merchant_id, call_to_action
+    budget_type,start_time,end_time,ad_title,ad_text, merchant_id, call_to_action,age_max, age_min
   } = req.body
   console.log(req.files)
   //     let budget = req.params.budget;
@@ -86,7 +86,7 @@ server.post("/create_fb_ad_campaign", upload.any(), async (req, res) => {
     'bid_amount' : budget,
     'billing_event' : 'IMPRESSIONS',
     'optimization_goal' : 'CONVERSATIONS',
-    'targeting' : {'age_min':age_range.age_min,'age_max':age_range.age_max,'behaviors':[],'genders':[gender],'geo_locations':{'countries':['US'],}},
+    'targeting' : {'age_min':age_min,'age_max':age_max,'behaviors':[],'genders':[gender],'geo_locations':{'countries':['US'],}},
     'status' : 'PAUSED',
     "device_platforms ": [
       "all "
@@ -107,15 +107,75 @@ server.post("/create_fb_ad_campaign", upload.any(), async (req, res) => {
         [],
         {
           'name':adset_name,
-          "object_story_spec":{
-              "link_data": {
-                "call_to_action": {"type":"SHOP_NOW","value":{"app_destination":"MESSENGER"}},
-                "image_hash": adImage.images.bytes.hash,
-                "link": "www.joyup.me",
-                "message": ad_desc,
-              },
-              "page_id": "270763243298231"
-            }
+          
+          
+
+          "object_story_spec":
+          { 
+            "link_data": { 
+              "call_to_action": {"type":"ORDER_NOW","value":{"app_destination":"MESSENGER"}}, 
+              "image_hash": adImage.images.bytes.hash, 
+              "link": 'http://order.joyup.me/?merchant_id=5a7371c9a67ad0001a1023f8&location_id=36XR5VCKR6AXJ&page_id=369499770162312&ps_id=1600924856622496&type=delivery', 
+              "message": ad_desc,
+              "page_welcome_message": {
+                "message": {
+                  "attachment": {
+                    "type":"template",
+                    "payload": {
+                      "template_type":"generic",
+                      "elements": [
+                        {
+                          "title":ad_title,
+                          "image_url":adImage.images.bytes.url,
+                          "subtitle":ad_desc,
+                          "buttons": [
+                            {
+                              "type":"web_url",
+                              "url":"http://order.joyup.me/?merchant_id=5a7371c9a67ad0001a1023f8&location_id=36XR5VCKR6AXJ&page_id=369499770162312&ps_id=1600924856622496&type=delivery",
+                              "title":"Delivery"
+                            },
+                            {
+                              "type":"web_url",
+                              "url":"http://order.joyup.me/?merchant_id=5a7371c9a67ad0001a1023f8&location_id=36XR5VCKR6AXJ&page_id=369499770162312&ps_id=1600924856622496&type=pickup",
+                              "title":"Pickup",
+                              
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  // "quick_replies": [
+                  //   {
+                  //     "content_type":"text",
+                  //     "title":"Hello",
+                  //     "payload":"reply1"
+                  //   },
+                  //   {
+                  //     "content_type":"text",
+                  //     "title":"Learn More",
+                  //     "payload":"reply2"
+                  //   }
+                  // ]
+                }
+              }
+            },
+            "page_id": "270763243298231" 
+          }
+          // {
+          //     "link_data": {
+          //       "call_to_action": {"type":"ORDER_NOW","value":{"app_destination":"MESSENGER"}},
+          //        "image_hash": adImage.images.bytes.hash,
+               
+          //       "message": ad_desc,
+          //     },
+          //     "image_hash": adImage.images.bytes.hash,
+          //     "link": "https://fb.com/messenger_doc/",
+          //     "page_id": "270763243298231",
+          //     "message": "Body from Patrick...",
+          //   "page_welcome_message":pageMessage
+            
+          //   }
 
         }
     )
