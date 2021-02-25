@@ -117,7 +117,7 @@ server.post("/create_fb_ad_campaign", upload.any(), async (req, res) => {
               "image_hash": adImage.images.bytes.hash, 
               "link": 'http://order.joyup.me/?merchant_id=5a7371c9a67ad0001a1023f8&location_id=36XR5VCKR6AXJ&page_id=369499770162312&ps_id=1600924856622496&type=delivery', 
               "message": ad_desc,
-              'body':ad_text,
+              // 'body':ad_text,
               "page_welcome_message": {
                 "message": {
                   "attachment": {
