@@ -163,20 +163,7 @@ server.post("/create_fb_ad_campaign", upload.any(), async (req, res) => {
             },
             "page_id": "369499770162312" 
           }
-          // {
-          //     "link_data": {
-          //       "call_to_action": {"type":"ORDER_NOW","value":{"app_destination":"MESSENGER"}},
-          //        "image_hash": adImage.images.bytes.hash,
-               
-          //       "message": ad_desc,
-          //     },
-          //     "image_hash": adImage.images.bytes.hash,
-          //     "link": "https://fb.com/messenger_doc/",
-          //     "page_id": "270763243298231",
-          //     "message": "Body from Patrick...",
-          //   "page_welcome_message":pageMessage
-            
-          //   }
+        
 
         }
     )
