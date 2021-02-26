@@ -107,7 +107,9 @@ server.post("/create_fb_ad_campaign", upload.any(), async (req, res) => {
         [],
         {
           'name':adset_name,
-          
+          'body':[
+            {'text':ad_text}
+          ],
           
 
           "object_story_spec":
