@@ -116,7 +116,7 @@ server.post("/create_fb_ad_campaign", upload.any(), async (req, res) => {
               "call_to_action": {"type":"ORDER_NOW","value":{"app_destination":"MESSENGER"}}, 
               "image_hash": adImage.images.bytes.hash, 
               "link": 'http://order.joyup.me/?merchant_id=5a7371c9a67ad0001a1023f8&location_id=36XR5VCKR6AXJ&page_id=369499770162312&ps_id=1600924856622496&type=delivery', 
-              "message": ad_desc,
+              "message": ad_title,
               // 'body':ad_text,
               "page_welcome_message": {
                 "message": {
@@ -161,7 +161,7 @@ server.post("/create_fb_ad_campaign", upload.any(), async (req, res) => {
                 }
               }
             },
-            "page_id": "270763243298231" 
+            "page_id": "369499770162312" 
           }
           // {
           //     "link_data": {
