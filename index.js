@@ -54,7 +54,7 @@ server.post("/create_fb_ad_campaign", upload.any(), async (req, res) => {
   //  const{promo_text,promo_description,image_url,promo_name, merhant_id,location_id,promo_type} = promoToBoost;
   const bizSdk = require('facebook-nodejs-business-sdk');
 
-  const accessToken = 'EAADxqKWGDYkBAO96f8ZCeZBZAnyCZBMvJFHUuLqAqZCRQxZAOHzxdDZCqwGrGRQ159MlbkwZAkj0jFhCL2uXdm6enEL3Qfmh0eJLIutl5Tb40qHQP6CZBOHpNdY4p3LiZCJmLxdtBKNpX3O4T2tUg3FD6F4ZBcKQ4UEzfaFGZCa5WePZAQgZDZD';
+  const accessToken = 'EAADxqKWGDYkBAMJLXdV54WdZCBceKsMLw1UhDuiXjQlLCYlGa3sXyQNTLRKsbFSZAcvLtEhBHiVrO0WAmJ1HunWpZCTa4ATdZAQ7t1PYG60yUnnhCJb3RougnhqBn6zWQY9gMZBa6llRx5daGuZA80UJwQiOVIdmLtuqCabn40eobv069scWHjfa6CTUiVGi2WM8hS7ljDAAZDZD';
   // const accountId = 'act_2517267978507637';
   const accountId ='act_210261016055454'
 
@@ -116,7 +116,7 @@ server.post("/create_fb_ad_campaign", upload.any(), async (req, res) => {
               "call_to_action": {"type":"ORDER_NOW","value":{"app_destination":"MESSENGER"}}, 
               "image_hash": adImage.images.bytes.hash, 
               "link": 'http://order.joyup.me/?merchant_id=5a7371c9a67ad0001a1023f8&location_id=36XR5VCKR6AXJ&page_id=369499770162312&ps_id=1600924856622496&type=delivery', 
-              "message": ad_title,
+              "message": ad_desc,
               // 'body':ad_text,
               "page_welcome_message": {
                 "message": {
@@ -146,24 +146,28 @@ server.post("/create_fb_ad_campaign", upload.any(), async (req, res) => {
                       ]
                     }
                   },
-                  // "quick_replies": [
-                  //   {
-                  //     "content_type":"text",
-                  //     "title":"Hello",
-                  //     "payload":"reply1"
-                  //   },
-                  //   {
-                  //     "content_type":"text",
-                  //     "title":"Learn More",
-                  //     "payload":"reply2"
-                  //   }
-                  // ]
+              
                 }
               }
             },
+            // 270763243298231
+            // 369499770162312
             "page_id": "369499770162312" 
           }
-        
+          // {
+          //     "link_data": {
+          //       "call_to_action": {"type":"ORDER_NOW","value":{"app_destination":"MESSENGER"}},
+          //        "image_hash": adImage.images.bytes.hash,
+               
+          //       "message": ad_desc,
+          //     },
+          //     "image_hash": adImage.images.bytes.hash,
+          //     "link": "https://fb.com/messenger_doc/",
+          //     "page_id": "270763243298231",
+          //     "message": "Body from Patrick...",
+          //   "page_welcome_message":pageMessage
+            
+          //   }
 
         }
     )
@@ -172,7 +176,7 @@ server.post("/create_fb_ad_campaign", upload.any(), async (req, res) => {
     const createAd = await account.createAd(
         [],
         {
-          'name' : ad_title,
+          'name' : adset_name,
           'adset_id' : adsets.id,
           'creative' : {'creative_id':adCreative.id},
           'status' : 'PAUSED',
