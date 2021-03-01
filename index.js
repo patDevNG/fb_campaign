@@ -54,7 +54,7 @@ server.post("/create_fb_ad_campaign", upload.any(), async (req, res) => {
   //  const{promo_text,promo_description,image_url,promo_name, merhant_id,location_id,promo_type} = promoToBoost;
   const bizSdk = require('facebook-nodejs-business-sdk');
 
-  const accessToken = 'EAADxqKWGDYkBAMJLXdV54WdZCBceKsMLw1UhDuiXjQlLCYlGa3sXyQNTLRKsbFSZAcvLtEhBHiVrO0WAmJ1HunWpZCTa4ATdZAQ7t1PYG60yUnnhCJb3RougnhqBn6zWQY9gMZBa6llRx5daGuZA80UJwQiOVIdmLtuqCabn40eobv069scWHjfa6CTUiVGi2WM8hS7ljDAAZDZD';
+  const accessToken = 'EAADxqKWGDYkBAMSNCs1TeIfOL476U7vayOcFUirtey7AAosCJ1ZBPbHJrocyov3isVh5rAfZCUWJhVnZBdtOro1sQnxpZCDGVAjPj0uSIKIXRXTnUuHYeuBRNkLXH1hCqiMRFKNokW8qxIsXVwYiE9EcBy53pv4mb9XO0PdYmZB0ISpNTI3jZCHpBVQk1D3wJYQH5VrQoLqxJv6GKMZBMKHpZCBwFyZAy4Da3r2OFeW9VprEahwkiQJlC';
   // const accountId = 'act_2517267978507637';
   const accountId ='act_210261016055454'
 
