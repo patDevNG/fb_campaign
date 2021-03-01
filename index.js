@@ -115,10 +115,11 @@ server.post("/create_fb_ad_campaign", upload.any(), async (req, res) => {
           "object_story_spec":
           { 
             "link_data": { 
+              "name":ad_title,
               "call_to_action": {"type":"ORDER_NOW","value":{"app_destination":"MESSENGER"}}, 
               "image_hash": adImage.images.bytes.hash, 
               "link": 'http://order.joyup.me/?merchant_id=5a7371c9a67ad0001a1023f8&location_id=36XR5VCKR6AXJ&page_id=369499770162312&ps_id=1600924856622496&type=delivery', 
-              "message": ad_desc,
+              "message": ad_text,
               // 'body':ad_text,
               "page_welcome_message": {
                 "message": {
@@ -218,6 +219,11 @@ server.post("/ad_image", async (req, res) => {
     res.status(500).send(error);
   }
 });
+
+server.post("/preview_ad", async(req,res)=>{
+  
+})
 server.listen(process.env.PORT || 8584, () => {
   console.log(`Server started at port :8584`);
 });
+
