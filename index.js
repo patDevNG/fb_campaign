@@ -41,7 +41,8 @@ server.post("/create_fb_ad_campaign", upload.any(), async (req, res) => {
   // console.log({base64String})
 
   let {adset_name,age_range,gender,budget,ad_desc,location_targeting_people,device_platforms,platform_facebook,platform_messenger,
-    budget_type,start_time,end_time,ad_title,ad_text, merchant_id, call_to_action,age_max, age_min
+    budget_type,start_time,end_time,ad_title,ad_text, merchant_id, call_to_action,age_max, age_min,
+    ads_messenger_welcome_message,ads_messenger_description,ads_messenger_button_text
   } = req.body
   console.log(req.files)
   //     let budget = req.params.budget;
@@ -126,21 +127,16 @@ server.post("/create_fb_ad_campaign", upload.any(), async (req, res) => {
                       "template_type":"generic",
                       "elements": [
                         {
-                          "title":ad_title,
+                          "title":ads_messenger_welcome_message,
                           "image_url":adImage.images.bytes.url,
-                          "subtitle":ad_desc,
+                          "subtitle":ads_messenger_description,
                           "buttons": [
                             {
-                              "type":"web_url",
-                              "url":"http://order.joyup.me/?merchant_id=5a7371c9a67ad0001a1023f8&location_id=36XR5VCKR6AXJ&page_id=369499770162312&ps_id=1600924856622496&type=delivery",
-                              "title":"Delivery"
+                              "type":"postback",
+                              "payload":"GETSTARTED",
+                              "title":ads_messenger_button_text?ads_messenger_button_text:"Claim Offer"
                             },
-                            {
-                              "type":"web_url",
-                              "url":"http://order.joyup.me/?merchant_id=5a7371c9a67ad0001a1023f8&location_id=36XR5VCKR6AXJ&page_id=369499770162312&ps_id=1600924856622496&type=pickup",
-                              "title":"Pickup",
-                              
-                            }
+                           
                           ]
                         }
                       ]
