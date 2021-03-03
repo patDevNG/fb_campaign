@@ -213,8 +213,92 @@ server.post("/ad_image", async (req, res) => {
   }
 });
 
-server.post("/preview_ad", async(req,res)=>{
+server.post("/preview_ad",upload.any(), async(req,res)=>{
+  const bizSdk = require('facebook-nodejs-business-sdk');
+  console.log(req.files, 'files')
+  console.log(req.body)
+  const base64String = fs.readFileSync(req.files[0].path).toString("base64");
+ 
+  // console.log({base64String})
+
+  let {adset_name,age_range,gender,budget,ad_desc,location_targeting_people,device_platforms,platform_facebook,platform_messenger,
+    budget_type,start_time,end_time,ad_title,ad_text, merchant_id, call_to_action,age_max, age_min,
+    ads_messenger_welcome_message,ads_messenger_description,ads_messenger_button_text
+  } = req.body
+  const accessToken = 'EAADxqKWGDYkBAITPWDsZB5HQPCuuoqxwUWIyZAGPSu8ZAuKgZAr5SwKHrEKeY0IJojLloUCBT3JGZBeRLopEMMcBeiBhmMueanksXyqNsm4qF1peEhKFKDcVCuFGaSNtr3rsld8meGYWHUKFIW8vGpPvTiYaRf3SP3Qsvp1OaKuFYsZAHn2crOb48hKGwtJsmrAEpOqiHj7SQMG5XNbDBZA5TrZC3jRzFWttkC96KZAjzPQZDZD';
+  const FacebookAdsApi = bizSdk.FacebookAdsApi.init(accessToken);
+  console.log(req.files)
   
+  const AdAccount = bizSdk.AdAccount;
+  const AdPreview = bizSdk.AdPreview;
+  const accountId ='act_210261016055454'
+  const account = new AdAccount(accountId);
+  
+  // const FacebookAdsApi = bizSdk.FacebookAdsApi.init(accessToken);
+
+  // await bizSdk.FacebookAdsApi.init(accessToken);
+
+try {
+  
+  const adImage = await account.createAdImage([], {
+    bytes: base64String,
+  });
+  let fields, params;
+  fields = [];
+  params ={
+    'creative':{ "object_story_spec":
+    { 
+      "link_data": { 
+        "name":ad_title,
+        "call_to_action": {"type":"ORDER_NOW","value":{"app_destination":"MESSENGER"}}, 
+        "image_hash": adImage.images.bytes.hash, 
+        "link": 'http://order.joyup.me/?merchant_id=5a7371c9a67ad0001a1023f8&location_id=36XR5VCKR6AXJ&page_id=369499770162312&ps_id=1600924856622496&type=delivery', 
+        "message": ad_text,
+        // 'body':ad_text,
+        "page_welcome_message": {
+          "message": {
+            "attachment": {
+              "type":"template",
+              "payload": {
+                "template_type":"generic",
+                "elements": [
+                  {
+                    "title":ads_messenger_welcome_message,
+                    "image_url":adImage.images.bytes.url,
+                    "subtitle":ads_messenger_description,
+                    "buttons": [
+                      {
+                        "type":"postback",
+                        "payload":"GETSTARTED",
+                        "title":ads_messenger_button_text?ads_messenger_button_text:"Claim Offer"
+                      },
+                     
+                    ]
+                  }
+                ]
+              }
+            },
+        
+          }
+        }
+      },
+      // 270763243298231
+      // 369499770162312
+      "page_id": "369499770162312" 
+    }
+  },
+  'ad_format':'MOBILE_FEED_STANDARD'
+  }
+  const generatedPreviews = await account.getGeneratePreviews(
+    fields,
+    params
+  );
+  res.status(200).send(generatedPreviews);
+} catch (error) {
+  console.log(error);
+  res.status(500).send(error)
+}
+
 })
 server.listen(process.env.PORT || 8584, () => {
   console.log(`Server started at port :8584`);
